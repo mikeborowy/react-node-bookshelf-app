@@ -2,7 +2,7 @@
 import {jsx} from '@emotion/core'
 
 import {Link} from 'react-router-dom'
-import {useListItem} from 'api/list-items'
+import {useListItem} from 'hooks/list-items'
 import * as mq from 'styles/media-queries'
 import * as colors from 'styles/colors'
 import {StatusButtons} from './status-buttons'

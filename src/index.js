@@ -3,8 +3,8 @@ import './bootstrap'
 import * as React from 'react'
 import ReactDOM from 'react-dom'
 import {Profiler} from 'components/profiler'
-import {App} from './app/app'
-import {AppProviders} from './app/app-providers'
+import {App} from './app'
+import {AppProviders} from './context'
 
 loadDevTools(() => {
   ReactDOM.render(

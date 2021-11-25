@@ -1,11 +1,11 @@
 import '@testing-library/jest-dom/extend-expect'
 import {configure, act, waitFor} from '@testing-library/react'
 import {queryCache} from 'react-query'
-import * as authHelpers from 'contexts/auth-helpers'
-import {server} from 'test/server'
-import * as usersDB from 'test/data/users'
-import * as listItemsDB from 'test/data/list-items'
-import * as booksDB from 'test/data/books'
+import * as auth from 'auth-provider'
+import {server} from 'mock-server/server'
+import * as usersDB from 'mock-server/data/users'
+import * as listItemsDB from 'mock-server/data/list-items'
+import * as booksDB from 'mock-server/data/books'
 
 // we don't need the profiler in tests
 jest.mock('components/profiler')

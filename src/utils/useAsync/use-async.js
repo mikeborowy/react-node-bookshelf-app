@@ -1,11 +1,11 @@
 import * as React from 'react'
-import {useSafeDispatch} from './use-safe-dispatch'
+import {useSafeDispatch} from '../useSafeDispatch/use-safe-dispatch'
 
 // Example usage:
-// const {data, error, status, executePromise} = useAsync()
+// const {data, error, status, run} = useAsync()
 // React.useEffect(() => {
-//   executePromise(fetchPokemon(pokemonName))
-// }, [pokemonName, executePromise])
+//   run(fetchPokemon(pokemonName))
+// }, [pokemonName, run])
 const defaultInitialState = {status: 'idle', data: null, error: null}
 function useAsync(initialState) {
   const initialStateRef = React.useRef({
@@ -32,11 +32,11 @@ function useAsync(initialState) {
     [safeSetState],
   )
 
-  const executePromise = React.useCallback(
+  const run = React.useCallback(
     promise => {
       if (!promise || !promise.then) {
         throw new Error(
-          `The argument passed to useAsync().executePromise must be a promise. Maybe a function that's passed isn't returning anything?`,
+          `The argument passed to useAsync().run must be a promise. Maybe a function that's passed isn't returning anything?`,
         )
       }
       safeSetState({status: 'pending'})
@@ -66,7 +66,7 @@ function useAsync(initialState) {
     error,
     status,
     data,
-    executePromise,
+    run,
     reset,
   }
 }

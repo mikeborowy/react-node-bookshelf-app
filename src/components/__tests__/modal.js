@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {render, screen, within} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import {Modal, ModalContent, ModalOpenButton} from '../modal'
+import {Modal, ModalContents, ModalOpenButton} from '../modal'
 
 test('can be opened and closed', async () => {
   const label = 'Modal Label'
@@ -11,9 +11,9 @@ test('can be opened and closed', async () => {
       <ModalOpenButton>
         <button>Open</button>
       </ModalOpenButton>
-      <ModalContent aria-label={label} title={title}>
+      <ModalContents aria-label={label} title={title}>
         <div>Modal Content</div>
-      </ModalContent>
+      </ModalContents>
     </Modal>,
   )
   userEvent.click(screen.getByRole('button', {name: 'Open'}))

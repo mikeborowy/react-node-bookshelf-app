@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {useQuery, queryCache} from 'react-query'
-import {useAuthenticatedClient} from 'contexts/auth-context'
+import {useClient} from 'context/auth-context/auth-context'
 import bookPlaceholderSvg from 'assets/book-placeholder.svg'
 
 const loadingBook = {
@@ -22,12 +22,10 @@ const bookQueryConfig = {
   cacheTime: 1000 * 60 * 60,
 }
 
-const getBookSearchConfig = (apiClient, query) => ({
+const getBookSearchConfig = (client, query) => ({
   queryKey: ['bookSearch', {query}],
   queryFn: () =>
-    apiClient(`books?query=${encodeURIComponent(query)}`).then(
-      data => data.books,
-    ),
+    client(`books?query=${encodeURIComponent(query)}`).then(data => data.books),
   config: {
     onSuccess(books) {
       for (const book of books) {
@@ -42,23 +40,23 @@ const getBookSearchConfig = (apiClient, query) => ({
 })
 
 function useBookSearch(query) {
-  const client = useAuthenticatedClient()
+  const client = useClient()
   const result = useQuery(getBookSearchConfig(client, query))
   return {...result, books: result.data ?? loadingBooks}
 }
 
 function useBook(bookId) {
-  const apiClient = useAuthenticatedClient()
+  const client = useClient()
   const {data} = useQuery({
     queryKey: ['book', {bookId}],
-    queryFn: () => apiClient(`books/${bookId}`).then(data => data.book),
+    queryFn: () => client(`books/${bookId}`).then(data => data.book),
     ...bookQueryConfig,
   })
   return data ?? loadingBook
 }
 
 function useRefetchBookSearchQuery() {
-  const client = useAuthenticatedClient()
+  const client = useClient()
   return React.useCallback(
     async function refetchBookSearchQuery() {
       queryCache.removeQueries('bookSearch')

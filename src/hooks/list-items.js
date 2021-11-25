@@ -1,6 +1,6 @@
 import {useQuery, useMutation, queryCache} from 'react-query'
 import {setQueryDataForBook} from './books'
-import {useAuthenticatedClient} from 'contexts/auth-context'
+import {useClient} from 'context/auth-context/auth-context'
 
 function useListItem(bookId, options) {
   const listItems = useListItems(options)
@@ -8,11 +8,11 @@ function useListItem(bookId, options) {
 }
 
 function useListItems(options = {}) {
-  const apiClient = useAuthenticatedClient()
+  const client = useClient()
 
   const {data: listItems} = useQuery({
     queryKey: 'list-items',
-    queryFn: () => apiClient('list-items').then(data => data.listItems),
+    queryFn: () => client('list-items').then(data => data.listItems),
     ...options,
     config: {
       ...options.config,
@@ -46,11 +46,11 @@ function onUpdateMutation(newItem) {
 }
 
 function useUpdateListItem(options) {
-  const apiClient = useAuthenticatedClient()
+  const client = useClient()
 
   return useMutation(
     updates =>
-      apiClient(`list-items/${updates.id}`, {
+      client(`list-items/${updates.id}`, {
         method: 'PUT',
         data: updates,
       }),
@@ -63,30 +63,27 @@ function useUpdateListItem(options) {
 }
 
 function useRemoveListItem(options) {
-  const apiClient = useAuthenticatedClient()
+  const client = useClient()
 
-  return useMutation(
-    ({id}) => apiClient(`list-items/${id}`, {method: 'DELETE'}),
-    {
-      onMutate: removedItem => {
-        const previousItems = queryCache.getQueryData('list-items')
+  return useMutation(({id}) => client(`list-items/${id}`, {method: 'DELETE'}), {
+    onMutate: removedItem => {
+      const previousItems = queryCache.getQueryData('list-items')
 
-        queryCache.setQueryData('list-items', old => {
-          return old.filter(item => item.id !== removedItem.id)
-        })
+      queryCache.setQueryData('list-items', old => {
+        return old.filter(item => item.id !== removedItem.id)
+      })
 
-        return () => queryCache.setQueryData('list-items', previousItems)
-      },
-      ...defaultMutationOptions,
-      ...options,
+      return () => queryCache.setQueryData('list-items', previousItems)
     },
-  )
+    ...defaultMutationOptions,
+    ...options,
+  })
 }
 
 function useCreateListItem(options) {
-  const apiClient = useAuthenticatedClient()
+  const client = useClient()
 
-  return useMutation(({bookId}) => apiClient('list-items', {data: {bookId}}), {
+  return useMutation(({bookId}) => client('list-items', {data: {bookId}}), {
     ...defaultMutationOptions,
     ...options,
   })

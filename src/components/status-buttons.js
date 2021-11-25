@@ -15,19 +15,19 @@ import {
   useUpdateListItem,
   useRemoveListItem,
   useCreateListItem,
-} from 'api/list-items'
+} from 'hooks/list-items'
 import * as colors from 'styles/colors'
-import {useAsync} from 'hooks/use-async'
+import {useAsync} from 'utils/useAsync/use-async'
 import {CircleButton, Spinner} from './lib'
 
 function TooltipButton({label, highlight, onClick, icon, ...rest}) {
-  const {isLoading, isError, error, executePromise, reset} = useAsync()
+  const {isLoading, isError, error, run, reset} = useAsync()
 
   function handleClick() {
     if (isError) {
       reset()
     } else {
-      executePromise(onClick())
+      run(onClick())
     }
   }
 
@@ -58,9 +58,9 @@ function TooltipButton({label, highlight, onClick, icon, ...rest}) {
 function StatusButtons({book}) {
   const listItem = useListItem(book.id)
 
-  const [update] = useUpdateListItem({throwOnError: true})
-  const [remove] = useRemoveListItem({throwOnError: true})
-  const [create] = useCreateListItem({throwOnError: true})
+  const [mutate] = useUpdateListItem({throwOnError: true})
+  const [handleRemoveClick] = useRemoveListItem({throwOnError: true})
+  const [handleAddClick] = useCreateListItem({throwOnError: true})
 
   return (
     <React.Fragment>
@@ -69,14 +69,14 @@ function StatusButtons({book}) {
           <TooltipButton
             label="Mark as unread"
             highlight={colors.yellow}
-            onClick={() => update({id: listItem.id, finishDate: null})}
+            onClick={() => mutate({id: listItem.id, finishDate: null})}
             icon={<FaBook />}
           />
         ) : (
           <TooltipButton
             label="Mark as read"
             highlight={colors.green}
-            onClick={() => update({id: listItem.id, finishDate: Date.now()})}
+            onClick={() => mutate({id: listItem.id, finishDate: Date.now()})}
             icon={<FaCheckCircle />}
           />
         )
@@ -85,14 +85,14 @@ function StatusButtons({book}) {
         <TooltipButton
           label="Remove from list"
           highlight={colors.danger}
-          onClick={() => remove({id: listItem.id})}
+          onClick={() => handleRemoveClick({id: listItem.id})}
           icon={<FaMinusCircle />}
         />
       ) : (
         <TooltipButton
           label="Add to list"
           highlight={colors.indigo}
-          onClick={() => create({bookId: book.id})}
+          onClick={() => handleAddClick({bookId: book.id})}
           icon={<FaPlusCircle />}
         />
       )}

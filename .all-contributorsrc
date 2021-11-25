@@ -466,6 +466,24 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "marioleed",
+      "name": "Mario Sannum",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1763448?v=4",
+      "profile": "https://github.com/marioleed",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "jansabbe",
+      "name": "jansabbe",
+      "avatar_url": "https://avatars.githubusercontent.com/u/648689?v=4",
+      "profile": "http://www.atrenko.com",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,

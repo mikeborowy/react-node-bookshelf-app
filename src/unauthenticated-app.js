@@ -2,25 +2,19 @@
 import {jsx} from '@emotion/core'
 
 import * as React from 'react'
-import {
-  Input,
-  Button,
-  Spinner,
-  FormGroup,
-  ErrorMessage,
-} from '../components/lib'
-import {Modal, ModalContent, ModalOpenButton} from '../components/modal'
-import {Logo} from '../components/logo'
-import {useAuth} from '../contexts/auth-context'
-import {useAsync} from '../hooks/use-async'
+import {Input, Button, Spinner, FormGroup, ErrorMessage} from './components/lib'
+import {Modal, ModalContents, ModalOpenButton} from './components/modal'
+import {Logo} from './components/logo'
+import {useAuth} from './context/auth-context/auth-context'
+import {useAsync} from './utils/useAsync/use-async'
 
 function LoginForm({onSubmit, submitButton}) {
-  const {isLoading, isError, error, executePromise} = useAsync()
+  const {isLoading, isError, error, run} = useAsync()
   function handleSubmit(event) {
     event.preventDefault()
     const {username, password} = event.target.elements
 
-    executePromise(
+    run(
       onSubmit({
         username: username.value,
         password: password.value,
@@ -91,23 +85,23 @@ function UnauthenticatedApp() {
           <ModalOpenButton>
             <Button variant="primary">Login</Button>
           </ModalOpenButton>
-          <ModalContent aria-label="Login form" title="Login">
+          <ModalContents aria-label="Login form" title="Login">
             <LoginForm
               onSubmit={login}
               submitButton={<Button variant="primary">Login</Button>}
             />
-          </ModalContent>
+          </ModalContents>
         </Modal>
         <Modal>
           <ModalOpenButton>
             <Button variant="secondary">Register</Button>
           </ModalOpenButton>
-          <ModalContent aria-label="Registration form" title="Register">
+          <ModalContents aria-label="Registration form" title="Register">
             <LoginForm
               onSubmit={register}
               submitButton={<Button variant="secondary">Register</Button>}
             />
-          </ModalContent>
+          </ModalContents>
         </Modal>
       </div>
     </div>

@@ -3,18 +3,18 @@ import {jsx} from '@emotion/core'
 
 import * as React from 'react'
 import {queryCache} from 'react-query'
-import * as authHelpers from './auth-helpers'
-import {apiClient} from 'utils/api-client'
-import {useAsync} from 'hooks/use-async'
-import {setQueryDataForBook} from 'api/books'
+import * as auth from 'auth-provider'
+import {client} from 'utils/api-client/api-client'
+import {useAsync} from 'utils/useAsync/use-async'
+import {setQueryDataForBook} from 'hooks/books'
 import {FullPageSpinner, FullPageErrorFallback} from 'components/lib'
 
-async function initPreloadAppData() {
+async function bootstrapAppData() {
   let user = null
 
-  const token = await authHelpers.getToken()
+  const token = await auth.getToken()
   if (token) {
-    const data = await apiClient('init-preload', {token})
+    const data = await client('bootstrap', {token})
     queryCache.setQueryData('list-items', data.listItems, {
       staleTime: 5000,
     })
@@ -38,25 +38,25 @@ function AuthProvider(props) {
     isIdle,
     isError,
     isSuccess,
-    executePromise,
+    run,
     setData,
   } = useAsync()
 
   React.useEffect(() => {
-    const appDataPromise = initPreloadAppData()
-    executePromise(appDataPromise)
-  }, [executePromise])
+    const appDataPromise = bootstrapAppData()
+    run(appDataPromise)
+  }, [run])
 
   const login = React.useCallback(
-    form => authHelpers.login(form).then(user => setData(user)),
+    form => auth.login(form).then(user => setData(user)),
     [setData],
   )
   const register = React.useCallback(
-    form => authHelpers.register(form).then(user => setData(user)),
+    form => auth.register(form).then(user => setData(user)),
     [setData],
   )
   const logout = React.useCallback(() => {
-    authHelpers.logout()
+    auth.logout()
     queryCache.clear()
     setData(null)
   }, [setData])
@@ -89,13 +89,13 @@ function useAuth() {
   return context
 }
 
-function useAuthenticatedClient() {
+function useClient() {
   const {user} = useAuth()
   const token = user?.token
   return React.useCallback(
-    (endpoint, config) => apiClient(endpoint, {...config, token}),
+    (endpoint, config) => client(endpoint, {...config, token}),
     [token],
   )
 }
 
-export {AuthProvider, useAuth, useAuthenticatedClient}
+export {AuthProvider, useAuth, useClient}

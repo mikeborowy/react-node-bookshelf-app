@@ -55,13 +55,13 @@ const rejectedState = {
   isError: true,
 }
 
-test('calling executePromise with a promise which resolves', async () => {
+test('calling run with a promise which resolves', async () => {
   const {promise, resolve} = deferred()
   const {result} = renderHook(() => useAsync())
   expect(result.current).toEqual(defaultState)
   let p
   act(() => {
-    p = result.current.executePromise(promise)
+    p = result.current.run(promise)
   })
   expect(result.current).toEqual(pendingState)
   const resolvedValue = Symbol('resolved value')
@@ -80,13 +80,13 @@ test('calling executePromise with a promise which resolves', async () => {
   expect(result.current).toEqual(defaultState)
 })
 
-test('calling executePromise with a promise which rejects', async () => {
+test('calling run with a promise which rejects', async () => {
   const {promise, reject} = deferred()
   const {result} = renderHook(() => useAsync())
   expect(result.current).toEqual(defaultState)
   let p
   act(() => {
-    p = result.current.executePromise(promise)
+    p = result.current.run(promise)
   })
   expect(result.current).toEqual(pendingState)
   const rejectedValue = Symbol('rejected value')
@@ -138,7 +138,7 @@ test('No state updates happen if the component is unmounted while pending', asyn
   const {result, unmount} = renderHook(() => useAsync())
   let p
   act(() => {
-    p = result.current.executePromise(promise)
+    p = result.current.run(promise)
   })
   unmount()
   await act(async () => {
@@ -148,11 +148,9 @@ test('No state updates happen if the component is unmounted while pending', asyn
   expect(console.error).not.toHaveBeenCalled()
 })
 
-test('calling "executePromise" without a promise results in an early error', () => {
+test('calling "run" without a promise results in an early error', () => {
   const {result} = renderHook(() => useAsync())
-  expect(() =>
-    result.current.executePromise(),
-  ).toThrowErrorMatchingInlineSnapshot(
-    `"The argument passed to useAsync().executePromise must be a promise. Maybe a function that's passed isn't returning anything?"`,
+  expect(() => result.current.run()).toThrowErrorMatchingInlineSnapshot(
+    `"The argument passed to useAsync().run must be a promise. Maybe a function that's passed isn't returning anything?"`,
   )
 })

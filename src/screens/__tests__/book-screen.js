@@ -5,13 +5,13 @@ import {
   waitForLoadingToFinish,
   userEvent,
   loginAsUser,
-} from 'test/app-test-utils'
+} from 'mock-server/app-test-utils'
 import faker from 'faker'
-import {server, rest} from 'test/server'
-import {buildBook, buildListItem} from 'test/generate'
-import * as booksDB from 'test/data/books'
-import * as listItemsDB from 'test/data/list-items'
-import {formatDate} from 'utils/format-date'
+import {server, rest} from 'mock-server/server'
+import {buildBook, buildListItem} from 'mock-server/generate'
+import * as booksDB from 'mock-server/data/books'
+import * as listItemsDB from 'mock-server/data/list-items'
+import {formatDate} from 'utils/format-date/format-date'
 import {App} from 'app'
 
 const apiURL = process.env.REACT_APP_API_URL

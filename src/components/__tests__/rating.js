@@ -1,9 +1,9 @@
 import * as React from 'react'
-import {render, screen, waitFor, loginAsUser} from 'test/app-test-utils'
+import {render, screen, waitFor, loginAsUser} from 'mock-server/app-test-utils'
 import userEvent from '@testing-library/user-event'
-import {buildBook, buildListItem} from 'test/generate'
-import * as booksDB from 'test/data/books'
-import * as listItemsDB from 'test/data/list-items'
+import {buildBook, buildListItem} from 'mock-server/generate'
+import * as booksDB from 'mock-server/data/books'
+import * as listItemsDB from 'mock-server/data/list-items'
 import {Rating} from '../rating'
 
 async function renderRating({rating = 0} = {}) {

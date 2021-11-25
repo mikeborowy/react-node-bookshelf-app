@@ -1,8 +1,8 @@
 import {rest} from 'msw'
 import {match} from 'node-match-path'
-import * as booksDB from 'test/data/books'
-import * as usersDB from 'test/data/users'
-import * as listItemsDB from 'test/data/list-items'
+import * as booksDB from 'mock-server/data/books'
+import * as usersDB from 'mock-server/data/users'
+import * as listItemsDB from 'mock-server/data/list-items'
 
 let sleep
 if (process.env.CI) {
@@ -57,7 +57,7 @@ const handlers = [
     return res(ctx.json({user: {...user, token}}))
   }),
 
-  rest.get(`${apiUrl}/init-preload`, async (req, res, ctx) => {
+  rest.get(`${apiUrl}/bootstrap`, async (req, res, ctx) => {
     const user = await getUser(req)
     const token = getToken(req)
     const lis = await listItemsDB.readByOwner(user.id)
