@@ -4,10 +4,10 @@ import {
   waitForElementToBeRemoved,
 } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import * as auth from 'auth-provider'
+import * as auth from 'api/auth/auth'
 import {buildUser} from 'mock-server/generate'
 import * as usersDB from 'mock-server/data/users'
-import {AppProviders} from 'context'
+import {AppProviders} from 'app/app-providers'
 
 async function render(ui, {route = '/list', user, ...renderOptions} = {}) {
   // if you want to render the app unauthenticated then pass "null" as the user

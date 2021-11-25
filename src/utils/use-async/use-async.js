@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {useSafeDispatch} from '../useSafeDispatch/use-safe-dispatch'
+import {useSafeDispatch} from '../use-safe-dispatch/use-safe-dispatch'
 
 // Example usage:
 // const {data, error, status, run} = useAsync()

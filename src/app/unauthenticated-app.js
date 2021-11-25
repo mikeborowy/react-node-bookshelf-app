@@ -2,11 +2,11 @@
 import {jsx} from '@emotion/core'
 
 import * as React from 'react'
-import {Input, Button, Spinner, FormGroup, ErrorMessage} from './components/lib'
-import {Modal, ModalContents, ModalOpenButton} from './components/modal'
-import {Logo} from './components/logo'
-import {useAuth} from './context/auth-context/auth-context'
-import {useAsync} from './utils/useAsync/use-async'
+import {Input, Button, Spinner, FormGroup, ErrorMessage} from 'components/lib'
+import {Modal, ModalContents, ModalOpenButton} from 'components/modal'
+import {Logo} from 'components/logo'
+import {useAuth} from 'context/auth-context/auth-context'
+import {useAsync} from 'utils/use-async/use-async'
 
 function LoginForm({onSubmit, submitButton}) {
   const {isLoading, isError, error, run} = useAsync()

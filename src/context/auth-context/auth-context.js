@@ -3,10 +3,10 @@ import {jsx} from '@emotion/core'
 
 import * as React from 'react'
 import {queryCache} from 'react-query'
-import * as auth from 'auth-provider'
-import {client} from 'utils/api-client/api-client'
-import {useAsync} from 'utils/useAsync/use-async'
-import {setQueryDataForBook} from 'hooks/books'
+import * as auth from 'api/auth/auth'
+import {client} from 'api/api-client/api-client'
+import {useAsync} from 'utils/use-async/use-async'
+import {setQueryDataForBook} from 'api/books/books'
 import {FullPageSpinner, FullPageErrorFallback} from 'components/lib'
 
 async function bootstrapAppData() {

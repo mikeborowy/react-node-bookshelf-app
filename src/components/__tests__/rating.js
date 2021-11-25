@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {render, screen, waitFor, loginAsUser} from 'mock-server/app-test-utils'
+import {render, screen, waitFor, loginAsUser} from 'utils/tests/test-utils'
 import userEvent from '@testing-library/user-event'
 import {buildBook, buildListItem} from 'mock-server/generate'
 import * as booksDB from 'mock-server/data/books'

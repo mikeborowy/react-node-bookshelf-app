@@ -1,6 +1,6 @@
 import * as React from 'react'
-import {useAuth} from './context/auth-context/auth-context'
-import {FullPageSpinner} from './components/lib'
+import {useAuth} from 'context/auth-context/auth-context'
+import {FullPageSpinner} from 'components/lib'
 
 const AuthenticatedApp = React.lazy(() =>
   import(/* webpackPrefetch: true */ './authenticated-app'),

@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import {jsx} from '@emotion/core'
 
-import {useListItems} from 'hooks/list-items'
+import {useListItems} from 'api/list-items/list-items'
 import {BookListUL} from './lib'
 import {BookRow} from './book-row'
 import {Profiler} from './profiler'

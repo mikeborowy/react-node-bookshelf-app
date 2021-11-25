@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {client} from 'utils/api-client/api-client'
+import {client} from 'api/api-client/api-client'
 
 let queue = []
 
