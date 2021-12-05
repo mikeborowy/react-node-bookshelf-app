@@ -2,7 +2,7 @@ import {loadDevTools} from './dev-tools/load'
 import './bootstrap'
 import * as React from 'react'
 import ReactDOM from 'react-dom'
-import {Profiler} from 'components/profiler'
+import {Profiler} from 'components/Profiler/profiler'
 import {App} from 'app/app'
 import {AppProviders} from 'app/app-providers'
 

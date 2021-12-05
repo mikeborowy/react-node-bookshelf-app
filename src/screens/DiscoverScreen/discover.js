@@ -6,9 +6,9 @@ import Tooltip from '@reach/tooltip'
 import {FaSearch, FaTimes} from 'react-icons/fa'
 import * as colors from 'styles/colors'
 import {useBookSearch, useRefetchBookSearchQuery} from 'api/books/books'
-import {BookRow} from 'components/book-row'
+import {BookRow} from 'components/BookRow/book-row'
 import {BookListUL, Spinner, Input} from 'components/lib'
-import {Profiler} from 'components/profiler'
+import {Profiler} from 'components/Profiler/profiler'
 
 function DiscoverBooksScreen() {
   const [query, setQuery] = React.useState('')

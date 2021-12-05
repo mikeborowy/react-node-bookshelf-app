@@ -4,8 +4,8 @@ import {jsx} from '@emotion/core'
 import * as React from 'react'
 import {queryCache} from 'react-query'
 import * as auth from 'api/auth/auth'
-import {client} from 'api/api-client/api-client'
-import {useAsync} from 'utils/use-async/use-async'
+import {apiClient} from 'api/api-client/api-client'
+import {useAsync} from 'hooks/use-async/use-async'
 import {setQueryDataForBook} from 'api/books/books'
 import {FullPageSpinner, FullPageErrorFallback} from 'components/lib'
 
@@ -14,7 +14,7 @@ async function bootstrapAppData() {
 
   const token = await auth.getToken()
   if (token) {
-    const data = await client('bootstrap', {token})
+    const data = await apiClient('bootstrap', {token})
     queryCache.setQueryData('list-items', data.listItems, {
       staleTime: 5000,
     })
@@ -89,13 +89,13 @@ function useAuth() {
   return context
 }
 
-function useClient() {
+function useApiClient() {
   const {user} = useAuth()
   const token = user?.token
   return React.useCallback(
-    (endpoint, config) => client(endpoint, {...config, token}),
+    (endpoint, config) => apiClient(endpoint, {...config, token}),
     [token],
   )
 }
 
-export {AuthProvider, useAuth, useClient}
+export {AuthProvider, useAuth, useApiClient}

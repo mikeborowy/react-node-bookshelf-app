@@ -17,8 +17,8 @@ import {
   useCreateListItem,
 } from 'api/list-items/list-items'
 import * as colors from 'styles/colors'
-import {useAsync} from 'utils/use-async/use-async'
-import {CircleButton, Spinner} from './lib'
+import {useAsync} from 'hooks/use-async/use-async'
+import {CircleButton, Spinner} from '../lib'
 
 function TooltipButton({label, highlight, onClick, icon, ...rest}) {
   const {isLoading, isError, error, run, reset} = useAsync()

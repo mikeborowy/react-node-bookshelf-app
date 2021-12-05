@@ -7,11 +7,11 @@ import {Button, ErrorMessage, FullPageErrorFallback} from 'components/lib'
 import * as mq from 'styles/media-queries'
 import * as colors from 'styles/colors'
 import {useAuth} from 'context/auth-context/auth-context'
-import {ReadingListScreen} from 'screens/reading-list'
-import {FinishedScreen} from 'screens/finished'
-import {DiscoverBooksScreen} from 'screens/discover'
-import {BookScreen} from 'screens/book'
-import {NotFoundScreen} from 'screens/not-found'
+import {ReadingListScreen} from 'screens/ReadingListScreen/reading-list'
+import {FinishedScreen} from 'screens/FinishedScreen/finished'
+import {DiscoverBooksScreen} from 'screens/DiscoverScreen/discover'
+import {BookScreen} from 'screens/BookScreen/book'
+import {NotFoundScreen} from 'screens/NotFoundScreen/not-found'
 
 function ErrorFallback({error}) {
   return (

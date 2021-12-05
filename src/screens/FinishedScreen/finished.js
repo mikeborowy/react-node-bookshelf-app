@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {Link} from 'components/lib'
-import {ListItemList} from 'components/list-item-list'
+import {ListItemList} from 'components/ListItemList/list-item-list'
 
 function FinishedScreen() {
   return (

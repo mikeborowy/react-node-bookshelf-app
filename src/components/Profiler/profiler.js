@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {client} from 'api/api-client/api-client'
+import {apiClient} from 'api/api-client/api-client'
 
 let queue = []
 
@@ -11,7 +11,7 @@ function sendProfileQueue() {
   }
   const queueToSend = [...queue]
   queue = []
-  return client('profile', {data: queueToSend})
+  return apiClient('profile', {data: queueToSend})
 }
 
 // By wrapping the Profile like this, we can set the onRender to whatever

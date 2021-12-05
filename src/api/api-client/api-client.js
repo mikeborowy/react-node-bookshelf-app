@@ -2,7 +2,7 @@ import {queryCache} from 'react-query'
 import * as auth from 'api/auth/auth'
 const apiURL = process.env.REACT_APP_API_URL
 
-async function client(
+async function apiClient(
   endpoint,
   {data, token, headers: customHeaders, ...customConfig} = {},
 ) {
@@ -34,4 +34,4 @@ async function client(
   })
 }
 
-export {client}
+export {apiClient}

@@ -12,9 +12,9 @@ import {useListItem, useUpdateListItem} from 'api/list-items/list-items'
 import * as mq from 'styles/media-queries'
 import * as colors from 'styles/colors'
 import {Spinner, Textarea, ErrorMessage} from 'components/lib'
-import {Rating} from 'components/rating'
-import {Profiler} from 'components/profiler'
-import {StatusButtons} from 'components/status-buttons'
+import {Rating} from 'components/Rating/rating'
+import {Profiler} from 'components/Profiler/profiler'
+import {StatusButtons} from 'components/StatusButtons/status-buttons'
 
 function BookScreen() {
   const {bookId} = useParams()
